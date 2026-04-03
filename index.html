@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Limitless Strategy Group — Christopher Bache</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0d1b2a;
+      --navy-md: #162436;
+      --gold:    #b08d57;
+      --gold-lt: #c9a96e;
+      --gold-dim: rgba(176,141,87,0.15);
+      --white:   #ffffff;
+      --cream:   #f8f6f2;
+      --gray:    #6b7280;
+      --text:    #1c1c1e;
+      --border:  #e5e0d8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ──────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 56px;
+      height: 72px;
+      background: var(--navy);
+      border-bottom: 1px solid rgba(176,141,87,0.2);
+    }
+
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.25;
+    }
+    .nav-brand .company {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+    }
+    .nav-brand .name {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-lt); }
+
+    .nav-cta {
+      display: inline-block;
+      text-decoration: none;
+      border: 1px solid var(--gold);
+      color: var(--gold-lt);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--white); }
+
+    /* ─── HERO ─────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 56px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle geometric background accent */
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(176,141,87,0.08);
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      border: 1px solid rgba(176,141,87,0.12);
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero-left {}
+
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 5vw, 68px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 40px;
+    }
+
+    .hero-headline em {
+      color: var(--gold-lt);
+      font-style: italic;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      text-decoration: none;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #9a7a48; }
+
+    .btn-ghost {
+      display: inline-block;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--gold-lt); }
+
+    .hero-right {
+      border-left: 1px solid rgba(176,141,87,0.2);
+      padding-left: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hero-stat .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .hero-stat .num span {
+      color: var(--gold);
+    }
+
+    .hero-stat .label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+    }
+
+    .hero-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(176,141,87,0.12);
+    }
+
+    /* ─── SHARED ────────────────────────────────────────────── */
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 56px; }
+
+    .section-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    .section-title.light { color: var(--white); }
+
+    .section-body {
+      font-size: 16px;
+      line-height: 1.85;
+      color: var(--gray);
+    }
+
+    .section-body.light { color: rgba(255,255,255,0.6); }
+
+    /* ─── ABOUT INTRO ────────────────────────────────────────── */
+    #about {
+      padding: 112px 0;
+      background: var(--white);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-left {}
+
+    .about-left .section-title { margin-bottom: 28px; }
+
+    .about-left p {
+      font-size: 16px;
+      line-height: 1.85;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+    .about-left p:last-child { margin-bottom: 0; }
+
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .about-card {
+      padding: 36px 0;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .about-card:last-child { border-bottom: 1px solid var(--border); }
+
+    .about-card-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold);
+      padding-top: 4px;
+      letter-spacing: 0.06em;
+    }
+
+    .about-card-content {}
+
+    .about-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .about-card-text {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.75;
+    }
+
+    /* ─── PHILOSOPHY ─────────────────────────────────────────── */
+    #philosophy {
+      padding: 112px 0;
+      background: var(--navy);
+    }
+
+    .philosophy-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .philosophy-left {}
+
+    .philosophy-left .section-title { margin-bottom: 28px; }
+
+    .philosophy-left p {
+      font-size: 16px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .philosophy-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .pillar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      transition: padding-left 0.3s;
+      cursor: default;
+    }
+    .pillar:last-child { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .pillar:hover { padding-left: 8px; }
+
+    .pillar-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .pillar-arrow {
+      color: var(--gold);
+      font-size: 18px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .pillar:hover .pillar-arrow { opacity: 1; }
+
+    .pillar-sub {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-top: 3px;
+    }
+
+    /* ─── WHY ME ─────────────────────────────────────────────── */
+    #why {
+      padding: 112px 0;
+      background: var(--cream);
+    }
+
+    .why-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 72px;
+    }
+    .why-header .section-eyebrow { justify-content: center; }
+    .why-header .section-eyebrow::before { display: none; }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .why-card {
+      background: var(--white);
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: background 0.2s;
+    }
+    .why-card:hover { background: var(--navy); }
+    .why-card:hover .why-card-title,
+    .why-card:hover .why-card-text { color: var(--white); }
+    .why-card:hover .why-card-text { color: rgba(255,255,255,0.55); }
+    .why-card:hover .why-num { color: var(--gold); }
+
+    .why-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .why-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+      transition: color 0.2s;
+    }
+
+    .why-card-text {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.8;
+      transition: color 0.2s;
+    }
+
+    /* ─── QUOTES ─────────────────────────────────────────────── */
+    #quotes {
+      padding: 112px 0;
+      background: var(--white);
+    }
+
+    .quotes-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .quotes-header .section-eyebrow { justify-content: center; }
+    .quotes-header .section-eyebrow::before { display: none; }
+    .quotes-header .section-title { color: var(--navy); }
+
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .quote-card {
+      background: var(--cream);
+      padding: 56px 52px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .quote-mark {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--gold);
+      opacity: 0.4;
+      margin-bottom: -16px;
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(17px, 2vw, 22px);
+      font-style: italic;
+      color: var(--navy);
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+    .quote-rule {
+      width: 32px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .quote-tag {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray);
+      font-weight: 600;
+    }
+
+    /* ─── CONTACT ────────────────────────────────────────────── */
+    #contact {
+      padding: 112px 0;
+      background: var(--navy);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-left {}
+    .contact-left .section-title { margin-bottom: 20px; }
+
+    .contact-left p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      font-weight: 400;
+    }
+
+    .contact-info-item .icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(176,141,87,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-info-item .icon svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--gold);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-field label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .form-field input,
+    .form-field textarea {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--white);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 14px 18px;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: rgba(255,255,255,0.2); }
+    .form-field input:focus,
+    .form-field textarea:focus { border-color: var(--gold); }
+
+    .form-field textarea { resize: vertical; min-height: 130px; }
+
+    .form-submit {
+      background: var(--gold);
+      color: var(--white);
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 18px 44px;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background 0.2s;
+    }
+    .form-submit:hover { background: #9a7a48; }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      background: #080f17;
+      padding: 28px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold-lt);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .container { padding: 0 24px; }
+      #hero { padding: 110px 24px 72px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 56px; }
+      .hero-right { border-left: none; border-top: 1px solid rgba(176,141,87,0.2); padding-left: 0; padding-top: 56px; flex-direction: row; flex-wrap: wrap; gap: 32px; }
+      .about-grid,
+      .philosophy-inner,
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .why-grid { grid-template-columns: 1fr; gap: 2px; }
+      .quotes-grid { grid-template-columns: 1fr; gap: 2px; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-brand">
+      <span class="company">Limitless Strategy Group</span>
+      <span class="name">Christopher Bache</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#why">Approach</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Work With Me</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <p class="hero-eyebrow">Limitless Strategy Group</p>
+        <h1 class="hero-headline">
+          Growth<br>
+          <em>Amplified.</em><br>
+          Strategy<br>
+          Executed.
+        </h1>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Start the Conversation</a>
+          <a href="#about" class="btn-ghost">Learn More →</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-stat">
+          <div class="num">25<span>+</span></div>
+          <div class="label">Years in sales & marketing</div>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <div class="num">8<span>yrs</span></div>
+          <div class="label">Building & scaling LogoMix.com to exit</div>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <div class="num">5</div>
+          <div class="label">Areas of life we focus on together</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-left">
+          <p class="section-eyebrow">About Christopher</p>
+          <h2 class="section-title">I don't teach theory. I teach what I've lived.</h2>
+          <p>Most coaches have read the books. I've built the companies, led the teams, navigated the exits, and done the unglamorous work of building something real from the ground up.</p>
+          <p>My coaching is grounded in three decades of lived experience across business, health, relationships, and community. When we work together, you get someone who has been in the room — and can help you perform at your best in it.</p>
+          <p>I'm direct, efficient, and allergic to fluff. I believe your time is your most valuable asset. I don't waste mine, and I won't waste yours.</p>
+        </div>
+
+        <div class="about-right">
+          <div class="about-card">
+            <div class="about-card-num">01</div>
+            <div class="about-card-content">
+              <div class="about-card-title">Personal Development</div>
+              <div class="about-card-text">For over a decade I served as Camp Director for Sunshine Nevada, leading inclusive summer camps for children and young adults with autism. Community service isn't something I do — it's who I am. I've supported multiple Nevada-based charitable organizations and know what it means to show up for people who need it.</div>
+            </div>
+          </div>
+
+          <div class="about-card">
+            <div class="about-card-num">02</div>
+            <div class="about-card-content">
+              <div class="about-card-title">Professional Growth</div>
+              <div class="about-card-text">I've co-founded and scaled multiple companies in the U.S. and internationally. In 2018, my business partner and I exited LogoMix.com after eight years of deliberate, disciplined growth. I've hired, fired, pivoted, failed, rebuilt, and succeeded. That full-spectrum experience is what I bring to every client engagement.</div>
+            </div>
+          </div>
+
+          <div class="about-card">
+            <div class="about-card-num">03</div>
+            <div class="about-card-content">
+              <div class="about-card-title">Health &amp; Relationships</div>
+              <div class="about-card-text">True performance starts with your body and your relationships. I've invested in both — not as a side project, but as a non-negotiable foundation. When your health, your mindset, and your closest relationships are strong, everything else becomes possible. I'll help you build that foundation.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section id="philosophy">
+    <div class="container">
+      <div class="philosophy-inner">
+
+        <div class="philosophy-left">
+          <p class="section-eyebrow">The Framework</p>
+          <h2 class="section-title light">Five Areas. One Life. Everything Connected.</h2>
+          <p>Most people treat health, work, relationships, and community as separate categories. They're not. They're a single system — and when one area is neglected, the rest eventually feel it.</p>
+          <br>
+          <p>My coaching framework addresses all five areas of life, because sustainable growth requires a strong foundation at every level. We don't just optimize your business. We make sure the person running it is operating at full capacity too.</p>
+          <br>
+          <p>This is what separates coaching that changes your numbers from coaching that changes your life.</p>
+        </div>
+
+        <div class="philosophy-right">
+          <div class="pillar">
+            <div>
+              <div class="pillar-name">Health</div>
+              <div class="pillar-sub">Physical &amp; mental performance</div>
+            </div>
+            <div class="pillar-arrow">→</div>
+          </div>
+          <div class="pillar">
+            <div>
+              <div class="pillar-name">Family</div>
+              <div class="pillar-sub">Your closest relationships</div>
+            </div>
+            <div class="pillar-arrow">→</div>
+          </div>
+          <div class="pillar">
+            <div>
+              <div class="pillar-name">Friends</div>
+              <div class="pillar-sub">Your circle &amp; support system</div>
+            </div>
+            <div class="pillar-arrow">→</div>
+          </div>
+          <div class="pillar">
+            <div>
+              <div class="pillar-name">Business</div>
+              <div class="pillar-sub">Strategy, growth &amp; execution</div>
+            </div>
+            <div class="pillar-arrow">→</div>
+          </div>
+          <div class="pillar">
+            <div>
+              <div class="pillar-name">Community</div>
+              <div class="pillar-sub">Impact &amp; contribution</div>
+            </div>
+            <div class="pillar-arrow">→</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY ME -->
+  <section id="why">
+    <div class="container">
+      <div class="why-header">
+        <p class="section-eyebrow">Why Work With Me</p>
+        <h2 class="section-title">Real experience.<br>Clear thinking. No waste.</h2>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-num">01 — Track Record</div>
+          <div class="why-card-title">I've Built What I Coach</div>
+          <div class="why-card-text">I've sat where you're sitting. I've stared down the same decisions — how to grow, who to hire, when to pivot, how to lead when it's hard. My perspective isn't academic. It's earned.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-num">02 — Efficiency</div>
+          <div class="why-card-title">Your Time Is Sacred</div>
+          <div class="why-card-text">You have 168 hours every week. When those hours are aimed at the right actions — the right outreach, the right conversations, the right follow-up — growth stops being a mystery. I help you find that focus.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-num">03 — Clarity</div>
+          <div class="why-card-title">Structure Creates Freedom</div>
+          <div class="why-card-text">Are you set up to scale, or are you running on gut instinct and hope? A clear system for tracking leads, managing relationships, and measuring progress is the difference between stagnation and momentum.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTES -->
+  <section id="quotes">
+    <div class="container">
+      <div class="quotes-header">
+        <p class="section-eyebrow">The Mindset</p>
+        <h2 class="section-title">What I believe — and what I'll challenge you to believe</h2>
+      </div>
+
+      <div class="quotes-grid">
+        <div class="quote-card">
+          <div class="quote-mark">&ldquo;</div>
+          <div class="quote-text">Time isn't the problem. Focus is. You have 168 hours every week — the question is whether you're directing them toward the actions that actually move the needle.</div>
+          <div class="quote-rule"></div>
+          <div class="quote-tag">On Execution</div>
+        </div>
+        <div class="quote-card">
+          <div class="quote-mark">&ldquo;</div>
+          <div class="quote-text">Are you structured for growth? Without a simple system for leads, opportunities, and follow-up, you're not building a business — you're just staying busy.</div>
+          <div class="quote-rule"></div>
+          <div class="quote-tag">On Strategy</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+
+        <div class="contact-left">
+          <p class="section-eyebrow">Get In Touch</p>
+          <h2 class="section-title light">Ready to stop planning and start executing?</h2>
+          <p>Let's have a direct conversation about where you are, where you want to be, and whether working together makes sense. No pitch. No pressure.</p>
+          <div class="contact-info">
+            <div class="contact-info-item">
+              <div class="icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79a15.15 15.15 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57A1 1 0 0121 17v3.5A1 1 0 0120 21.5C10.34 21.5 2.5 13.66 2.5 4A1 1 0 013.5 3H7a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01L6.62 10.79z"/></svg>
+              </div>
+              702-610-9503
+            </div>
+            <div class="contact-info-item">
+              <div class="icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </div>
+              chris@limitlessstrategygroup.com
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form" onsubmit="return false;">
+          <div class="form-row">
+            <div class="form-field">
+              <label>Name</label>
+              <input type="text" placeholder="Your name" />
+            </div>
+            <div class="form-field">
+              <label>Email *</label>
+              <input type="email" placeholder="your@email.com" required />
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Phone *</label>
+            <input type="tel" placeholder="Your phone number" required />
+          </div>
+          <div class="form-field">
+            <label>What are you looking to achieve?</label>
+            <textarea placeholder="Give me the short version — I'll read every word."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Inquiry</button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">Limitless Strategy Group</div>
+    <div class="footer-copy">© 2025 Christopher Bache — All Rights Reserved</div>
+  </footer>
+
+</body>
+</html>
